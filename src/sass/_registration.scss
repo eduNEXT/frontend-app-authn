@@ -99,7 +99,7 @@
   }
 }
 
-@media (max-width: map-get($grid-breakpoints, "sm")) {
+@media (--pgn-size-breakpoint-max-width-sm ) {
   .username-scroll-suggested--form-field {
     width: 15rem;
   }
