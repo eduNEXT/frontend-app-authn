@@ -21,9 +21,6 @@ import { LoginPage } from '../login';
 import { RegistrationPage } from '../register';
 import { backupRegistrationForm } from '../register/data/actions';
 import { clearThirdPartyAuthContextErrorMessage } from './data/actions';
-import {
-  tpaProvidersSelector,
-} from './data/selectors';
 import messages from './messages';
 
 const Logistration = (props) => {
@@ -33,7 +30,7 @@ const Logistration = (props) => {
   const {
     providers, secondaryProviders,
   } = tpaProviders;
-  console.log('providers', providers, secondaryProviders)
+  console.log('providers', providers, secondaryProviders);
   const { formatMessage } = useIntl();
   const [institutionLogin, setInstitutionLogin] = useState(false);
   const [key, setKey] = useState('');
@@ -157,6 +154,7 @@ Logistration.defaultProps = {
   selectedPage: REGISTER_PAGE,
 };
 
+// eslint-disable-next-line no-unused-vars
 const mapStateToProps = state => ({
   tpaProviders: { providers: [], secondaryProviders: [] },
 });
