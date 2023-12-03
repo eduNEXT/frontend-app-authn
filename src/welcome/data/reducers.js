@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import {
   DEFAULT_STATE, PENDING_STATE,
 } from '../../data/constants';

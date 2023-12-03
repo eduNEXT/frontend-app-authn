@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import { COMPLETE_STATE, PENDING_STATE } from '../../data/constants';
 import { THIRD_PARTY_AUTH_CONTEXT } from './actions';
 

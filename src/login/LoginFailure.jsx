@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 
 import { getConfig } from '@edx/frontend-platform';
@@ -174,7 +175,7 @@ const LoginFailureMessage = (props) => {
   return (
     <Alert id="login-failure-alert" className="mb-5" variant="danger" icon={Error}>
       <Alert.Heading>{intl.formatMessage(messages['login.failure.header.title'])}</Alert.Heading>
-      { errorList }
+      {errorList}
     </Alert>
   );
 };
@@ -188,7 +189,7 @@ LoginFailureMessage.defaultProps = {
 
 LoginFailureMessage.propTypes = {
   loginError: PropTypes.shape({
-    context: PropTypes.object,
+    context: PropTypes.shape({}),
     email: PropTypes.string,
     errorCode: PropTypes.string,
     redirectUrl: PropTypes.string,

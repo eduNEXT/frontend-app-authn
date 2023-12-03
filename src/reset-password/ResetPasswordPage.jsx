@@ -158,8 +158,10 @@ const ResetPasswordPage = (props) => {
       <BaseComponent>
         <div>
           <Helmet>
-            <title>{intl.formatMessage(messages['reset.password.page.title'],
-              { siteName: getConfig().SITE_NAME })}
+            <title>{intl.formatMessage(
+              messages['reset.password.page.title'],
+              { siteName: getConfig().SITE_NAME },
+            )}
             </title>
           </Helmet>
           <Tabs activeKey="" id="controlled-tab" onSelect={(k) => setKey(k)}>

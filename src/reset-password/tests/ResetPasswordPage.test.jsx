@@ -1,3 +1,4 @@
+/* eslint-disable no-import-assign */
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -72,7 +73,7 @@ describe('ResetPasswordPage', () => {
     auth.getHttpClient = jest.fn(() => ({
       post: async () => ({
         data: {},
-        catch: () => {},
+        catch: () => { },
       }),
     }));
 
@@ -85,9 +86,9 @@ describe('ResetPasswordPage', () => {
       await resetPasswordPage.find('button.btn-brand').simulate('click');
     });
 
-    expect(store.dispatch).toHaveBeenCalledWith(resetPassword(
-      { new_password1: password, new_password2: password }, props.token, {},
-    ));
+    expect(store.dispatch).toHaveBeenCalledWith(resetPassword({
+      new_password1: password, new_password2: password,
+    }, props.token, {}));
     resetPasswordPage.unmount();
   });
 
@@ -120,9 +121,7 @@ describe('ResetPasswordPage', () => {
       },
     });
     const resetPasswordPage = mount(reduxWrapper(<IntlResetPasswordPage {...props} />));
-    resetPasswordPage.find('input#confirmPassword').simulate(
-      'change', { target: { value: 'password-mismatch', name: 'confirmPassword' } },
-    );
+    resetPasswordPage.find('input#confirmPassword').simulate('change', { target: { value: 'password-mismatch', name: 'confirmPassword' } });
     expect(resetPasswordPage.find('div[feedback-for="confirmPassword"]').text()).toContain('Passwords do not match');
   });
 

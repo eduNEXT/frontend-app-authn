@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-exports */
 export { default } from './ForgotPasswordPage';
 export { default as reducer } from './data/reducers';
 export { FORGOT_PASSWORD } from './data/actions';

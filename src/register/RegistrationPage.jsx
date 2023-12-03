@@ -225,19 +225,6 @@ class RegistrationPage extends React.Component {
     return true;
   }
 
-  onChangeHandler = (e) => {
-    const { name, value, checked } = e.target;
-    const { errors, values } = this.state;
-    if (e.target.type === 'checkbox') {
-      errors[name] = '';
-      values[name] = checked;
-    } else {
-      values[name] = value;
-    }
-    const state = { errors, values };
-    this.setState({ ...state });
-  };
-
   handleSubmit = (e) => {
     e.preventDefault();
 
@@ -301,7 +288,7 @@ class RegistrationPage extends React.Component {
     }, () => {
       this.props.registerNewUser(payload);
     });
-  }
+  };
 
   handleOnBlur = (e) => {
     let { name, value } = e.target;
@@ -324,7 +311,7 @@ class RegistrationPage extends React.Component {
       country: this.state.country,
     };
     this.validateInput(name, value, payload);
-  }
+  };
 
   handleOnChange = (e) => {
     let { value } = e.target;
@@ -340,7 +327,7 @@ class RegistrationPage extends React.Component {
     this.setState({
       [e.target.name]: value,
     });
-  }
+  };
 
   handleOnFocus = (e) => {
     const fieldName = e.target.name;
@@ -362,7 +349,7 @@ class RegistrationPage extends React.Component {
     this.props.setRegistrationFormData({
       errors,
     });
-  }
+  };
 
   handleSuggestionClick = (e, suggestion) => {
     const { errors } = this.state;
@@ -384,14 +371,33 @@ class RegistrationPage extends React.Component {
         errors,
       });
     }
-  }
+  };
 
   handleUsernameSuggestionClose = () => {
     this.props.setRegistrationFormData({
       username: '',
     });
     this.props.clearUsernameSuggestions();
+  };
+
+  handleOnClose() {
+    this.props.setRegistrationFormData({
+      emailErrorSuggestion: null,
+    });
   }
+
+  onChangeHandler = (e) => {
+    const { name, value, checked } = e.target;
+    const { errors, values } = this.state;
+    if (e.target.type === 'checkbox') {
+      errors[name] = '';
+      values[name] = checked;
+    } else {
+      values[name] = value;
+    }
+    const state = { errors, values };
+    this.setState({ ...state });
+  };
 
   validateDynamicFields = (e) => {
     const { intl } = this.props;
@@ -404,7 +410,7 @@ class RegistrationPage extends React.Component {
       errors.confirm_email = intl.formatMessage(messages['email.do.not.match']);
     }
     this.setState({ errors });
-  }
+  };
 
   isFormValid(payload, dynamicFieldError) {
     const { errors } = this.state;
@@ -571,12 +577,6 @@ class RegistrationPage extends React.Component {
     return errors;
   }
 
-  handleOnClose() {
-    this.props.setRegistrationFormData({
-      emailErrorSuggestion: null,
-    });
-  }
-
   renderEmailFeedback() {
     if (this.state.emailErrorSuggestion) {
       return (
@@ -647,13 +647,15 @@ class RegistrationPage extends React.Component {
     );
   }
 
-  renderForm(currentProvider,
+  renderForm(
+    currentProvider,
     providers,
     secondaryProviders,
     thirdPartyAuthApiStatus,
     finishAuthUrl,
     submitState,
-    intl) {
+    intl,
+  ) {
     if (this.props.institutionLogin) {
       return (
         <InstitutionLogistration
@@ -746,8 +748,10 @@ class RegistrationPage extends React.Component {
     return (
       <>
         <Helmet>
-          <title>{intl.formatMessage(messages['register.page.title'],
-            { siteName: getConfig().SITE_NAME })}
+          <title>{intl.formatMessage(
+            messages['register.page.title'],
+            { siteName: getConfig().SITE_NAME },
+          )}
           </title>
         </Helmet>
         <RedirectLogistration
@@ -756,7 +760,7 @@ class RegistrationPage extends React.Component {
           finishAuthUrl={finishAuthUrl}
           optionalFields={this.props.optionalFields}
           redirectToWelcomePage={getConfig().ENABLE_PROGRESSIVE_PROFILING
-                 && Object.keys(this.props.optionalFields).length !== 0}
+            && Object.keys(this.props.optionalFields).length !== 0}
         />
         <div className="mw-xs mt-3">
           {this.state.errorCode ? (
@@ -832,33 +836,33 @@ class RegistrationPage extends React.Component {
               />
             )}
             {!(this.showDynamicRegistrationFields)
-            && (
-              <CountryDropdown
-                name="country"
-                floatingLabel={intl.formatMessage(messages['registration.country.label'])}
-                options={this.countryList}
-                value={this.state.country}
-                autoComplete="on"
-                handleBlur={this.handleOnBlur}
-                handleFocus={this.handleOnFocus}
-                errorMessage={this.state.errors.country}
-                errorCode={this.state.errorCode}
-              />
-            )}
+              && (
+                <CountryDropdown
+                  name="country"
+                  floatingLabel={intl.formatMessage(messages['registration.country.label'])}
+                  options={this.countryList}
+                  value={this.state.country}
+                  autoComplete="on"
+                  handleBlur={this.handleOnBlur}
+                  handleFocus={this.handleOnFocus}
+                  errorMessage={this.state.errors.country}
+                  errorCode={this.state.errorCode}
+                />
+              )}
             {formFields}
             {(getConfig().MARKETING_EMAILS_OPT_IN)
-            && (
-              <Form.Checkbox
-                className="opt-checkbox"
-                name="marketing_emails_opt_in"
-                checked={this.state.marketingOptIn}
-                onChange={(e) => this.props.setRegistrationFormData({
-                  marketingOptIn: e.target.checked,
-                })}
-              >
-                {intl.formatMessage(messages['registration.opt.in.label'], { siteName: getConfig().SITE_NAME })}
-              </Form.Checkbox>
-            )}
+              && (
+                <Form.Checkbox
+                  className="opt-checkbox"
+                  name="marketing_emails_opt_in"
+                  checked={this.state.marketingOptIn}
+                  onChange={(e) => this.props.setRegistrationFormData({
+                    marketingOptIn: e.target.checked,
+                  })}
+                >
+                  {intl.formatMessage(messages['registration.opt.in.label'], { siteName: getConfig().SITE_NAME })}
+                </Form.Checkbox>
+              )}
             {!(this.showDynamicRegistrationFields) ? (
               <HonorCode
                 fieldType="tos_and_honor_code"
@@ -878,11 +882,13 @@ class RegistrationPage extends React.Component {
               onClick={this.handleSubmit}
               onMouseDown={(e) => e.preventDefault()}
             />
-            {this.renderThirdPartyAuth(providers,
+            {this.renderThirdPartyAuth(
+              providers,
               secondaryProviders,
               currentProvider,
               thirdPartyAuthApiStatus,
-              intl)}
+              intl,
+            )}
           </Form>
         </div>
       </>
@@ -1004,8 +1010,8 @@ RegistrationPage.propTypes = {
   thirdPartyAuthContext: PropTypes.shape({
     currentProvider: PropTypes.string,
     platformName: PropTypes.string,
-    providers: PropTypes.array,
-    secondaryProviders: PropTypes.array,
+    providers: PropTypes.shape([]),
+    secondaryProviders: PropTypes.shape([]),
     finishAuthUrl: PropTypes.string,
     countryCode: PropTypes.string,
     pipelineUserDetails: PropTypes.shape({

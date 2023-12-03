@@ -1,3 +1,4 @@
+/* eslint-disable no-import-assign */
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -66,6 +67,7 @@ describe('ProgressiveProfilingTests', () => {
     const progressiveProfilingPage = mount(reduxWrapper(<IntlProgressiveProfilingPage {...props} />));
     await act(async () => {
       await Promise.resolve(progressiveProfilingPage);
+      // eslint-disable-next-line no-promise-executor-return
       await new Promise(resolve => setImmediate(resolve));
       progressiveProfilingPage.update();
     });

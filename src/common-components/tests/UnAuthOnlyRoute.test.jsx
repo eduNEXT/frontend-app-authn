@@ -1,18 +1,23 @@
+/* eslint-disable no-import-assign */
+/* eslint-disable import/no-import-module-exports */
 import React from 'react';
 
 import * as auth from '@edx/frontend-platform/auth';
 import { mount } from 'enzyme';
-import { MemoryRouter, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { UnAuthOnlyRoute } from '..';
 import { LOGIN_PAGE } from '../../data/constants';
+
+import { MemoryRouter, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 jest.mock('@edx/frontend-platform/auth');
 
 const RRD = require('react-router-dom');
 // Just render plain div with its children
 // eslint-disable-next-line react/prop-types
-RRD.BrowserRouter = ({ children }) => <div>{ children }</div>;
+RRD.BrowserRouter = function ({ children }) {
+  return <div>{children}</div>;
+};
 module.exports = RRD;
 
 const TestApp = () => (

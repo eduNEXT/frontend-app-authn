@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 
 import { injectIntl, intlShape } from '@edx/frontend-platform/i18n';
@@ -54,8 +55,8 @@ const UsernameField = (props) => {
 
 UsernameField.defaultProps = {
   usernameSuggestions: [],
-  handleSuggestionClick: () => {},
-  handleUsernameSuggestionClose: () => {},
+  handleSuggestionClick: () => { },
+  handleUsernameSuggestionClose: () => { },
   errorMessage: '',
   autoComplete: null,
 };

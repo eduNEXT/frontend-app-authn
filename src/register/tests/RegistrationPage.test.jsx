@@ -1,3 +1,4 @@
+/* eslint-disable no-import-assign */
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -302,13 +303,13 @@ describe('RegistrationPage', () => {
           ...initialState.register,
           registrationError: {
             username: [{ userMessage: 'It looks like this username is already taken' }],
-            email: [{ userMessage: `This email is already associated with an existing or previous ${ getConfig().SITE_NAME } account` }],
+            email: [{ userMessage: `This email is already associated with an existing or previous ${getConfig().SITE_NAME} account` }],
           },
         },
       });
       const registrationPage = mount(reduxWrapper(<IntlRegistrationPage {...props} />)).find('RegistrationPage');
       expect(registrationPage.prop('validationDecisions')).toEqual({
-        email: `This email is already associated with an existing or previous ${ getConfig().SITE_NAME } account`,
+        email: `This email is already associated with an existing or previous ${getConfig().SITE_NAME} account`,
         username: 'It looks like this username is already taken',
       });
     });
@@ -392,7 +393,7 @@ describe('RegistrationPage', () => {
       });
 
       const expectedMessage = `${'You\'ve successfully signed into Apple! We just need a little more information before '
-                              + 'you start learning with '}${ getConfig().SITE_NAME }.`;
+        + 'you start learning with '}${getConfig().SITE_NAME}.`;
 
       const registerPage = mount(reduxWrapper(<IntlRegistrationPage {...props} />));
       expect(registerPage.find('#tpa-alert').find('p').text()).toEqual(expectedMessage);
@@ -753,8 +754,10 @@ describe('RegistrationPage', () => {
       delete window.location;
       window.location = { href: getConfig().BASE_URL.concat('/register'), search: '?save_for_later=true' };
       renderer.create(reduxWrapper(<IntlRegistrationPage {...props} />));
-      expect(analytics.sendTrackEvent).toHaveBeenCalledWith('edx.bi.user.saveforlater.course.enroll.clicked',
-        { category: 'save-for-later' });
+      expect(analytics.sendTrackEvent).toHaveBeenCalledWith(
+        'edx.bi.user.saveforlater.course.enroll.clicked',
+        { category: 'save-for-later' },
+      );
     });
 
     // ******** shouldComponentUpdate tests ********

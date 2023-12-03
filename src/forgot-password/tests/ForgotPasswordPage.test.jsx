@@ -1,3 +1,4 @@
+/* eslint-disable no-import-assign */
 import React from 'react';
 import { Provider } from 'react-redux';
 
@@ -83,9 +84,7 @@ describe('ForgotPasswordPage', () => {
     const validationMessage = 'We were unable to contact you.Enter a valid email address below.';
     const wrapper = mount(reduxWrapper(<IntlForgotPasswordPage {...props} />));
 
-    wrapper.find('input#email').simulate(
-      'change', { target: { value: 'invalid-email', name: 'email' } },
-    );
+    wrapper.find('input#email').simulate('change', { target: { value: 'invalid-email', name: 'email' } });
     await act(async () => { await wrapper.find('button.btn-brand').simulate('click'); });
     wrapper.update();
 
@@ -97,7 +96,7 @@ describe('ForgotPasswordPage', () => {
       forgotPassword: { status: INTERNAL_SERVER_ERROR },
     });
     const expectedMessage = 'We were unable to contact you.'
-                            + 'An error has occurred. Try refreshing the page, or check your internet connection.';
+      + 'An error has occurred. Try refreshing the page, or check your internet connection.';
     const wrapper = mount(reduxWrapper(<IntlForgotPasswordPage {...props} />));
 
     expect(wrapper.find('#validation-errors').first().text()).toEqual(expectedMessage);
@@ -204,8 +203,8 @@ describe('ForgotPasswordPage', () => {
       },
     });
     const successMessage = 'Check your emailWe sent an email to  with instructions to reset your password. If you do not '
-                           + 'receive a password reset message after 1 minute, verify that you entered the correct email address,'
-                           + ' or check your spam folder. If you need further assistance, contact technical support.';
+      + 'receive a password reset message after 1 minute, verify that you entered the correct email address,'
+      + ' or check your spam folder. If you need further assistance, contact technical support.';
 
     const wrapper = mount(reduxWrapper(<IntlForgotPasswordPage {...props} />));
     expect(wrapper.find('.alert-success').text()).toEqual(successMessage);
@@ -219,8 +218,8 @@ describe('ForgotPasswordPage', () => {
       },
     });
     const successMessage = 'Invalid password reset link'
-                            + 'This password reset link is invalid. It may have been used already. '
-                            + 'Enter your email below to receive a new link.';
+      + 'This password reset link is invalid. It may have been used already. '
+      + 'Enter your email below to receive a new link.';
 
     const wrapper = mount(reduxWrapper(<IntlForgotPasswordPage {...props} />));
     expect(wrapper.find('.alert-danger').text()).toEqual(successMessage);
