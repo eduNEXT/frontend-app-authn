@@ -61,32 +61,15 @@ class CountryDropdown extends React.Component {
     return null;
   }
 
-  getItems(strToFind = '') {
-    let { options } = this.props;
-    if (strToFind.length > 0) {
-      options = options.filter((option) => (option.name.toLowerCase().includes(strToFind.toLowerCase())));
-    }
-
-    return options.map((opt) => {
-      const value = opt[COUNTRY_CODE_KEY];
-      const displayValue = opt[COUNTRY_DISPLAY_KEY];
-
-      return (
-        <button type="button" name="countryItem" className="dropdown-item data-hj-suppress" value={displayValue} key={value} onClick={(e) => { this.handleItemClick(e); }}>
-          {displayValue.length > 30 ? displayValue.substring(0, 30).concat('...') : displayValue}
-        </button>
-      );
-    });
-  }
-
   handleOnChange = (e) => {
     const filteredItems = this.getItems(e.target.value);
     this.setState({
       dropDownItems: filteredItems,
       displayValue: e.target.value,
     });
-  }
+  };
 
+  // eslint-disable-next-line react/no-unused-class-component-methods
   handleClickOutside = () => {
     if (this.state.dropDownItems?.length > 0) {
       this.setState(() => ({
@@ -94,7 +77,7 @@ class CountryDropdown extends React.Component {
         dropDownItems: '',
       }));
     }
-  }
+  };
 
   handleExpandLess() {
     this.setState({ dropDownItems: '', icon: this.expandMoreButton() });
@@ -145,6 +128,24 @@ class CountryDropdown extends React.Component {
     }
     this.setState({ dropDownItems: '', icon: this.expandMoreButton() });
     this.handleOnBlur(e, true, countryValue);
+  }
+
+  getItems(strToFind = '') {
+    let { options } = this.props;
+    if (strToFind.length > 0) {
+      options = options.filter((option) => (option.name.toLowerCase().includes(strToFind.toLowerCase())));
+    }
+
+    return options.map((opt) => {
+      const value = opt[COUNTRY_CODE_KEY];
+      const displayValue = opt[COUNTRY_DISPLAY_KEY];
+
+      return (
+        <button type="button" name="countryItem" className="dropdown-item data-hj-suppress" value={displayValue} key={value} onClick={(e) => { this.handleItemClick(e); }}>
+          {displayValue.length > 30 ? displayValue.substring(0, 30).concat('...') : displayValue}
+        </button>
+      );
+    });
   }
 
   expandMoreButton() {
@@ -198,7 +199,7 @@ class CountryDropdown extends React.Component {
           errorMessage={this.state.errorMessage}
         />
         <div className="dropdown-container">
-          { this.state.dropDownItems?.length > 0 ? this.state.dropDownItems : null }
+          {this.state.dropDownItems?.length > 0 ? this.state.dropDownItems : null}
         </div>
       </div>
     );
@@ -216,7 +217,7 @@ CountryDropdown.defaultProps = {
 };
 
 CountryDropdown.propTypes = {
-  options: PropTypes.arrayOf(PropTypes.object),
+  options: PropTypes.arrayOf(PropTypes.shape({})),
   floatingLabel: PropTypes.string,
   handleFocus: PropTypes.func,
   handleBlur: PropTypes.func,

@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react';
 
 import { getConfig } from '@edx/frontend-platform';
@@ -7,7 +8,7 @@ import { Redirect } from 'react-router-dom';
 import { WELCOME_PAGE } from '../data/constants';
 import { setCookie } from '../data/utils';
 
-function RedirectLogistration(props) {
+const RedirectLogistration = (props) => {
   const {
     finishAuthUrl, redirectUrl, redirectToWelcomePage, success, optionalFields,
   } = props;
@@ -44,7 +45,7 @@ function RedirectLogistration(props) {
     window.location.href = finalRedirectUrl;
   }
   return <></>;
-}
+};
 
 RedirectLogistration.defaultProps = {
   finishAuthUrl: null,

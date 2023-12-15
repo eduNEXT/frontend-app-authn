@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React, { useEffect, useState } from 'react';
 
 import { getConfig } from '@edx/frontend-platform';
@@ -99,7 +100,7 @@ const Logistration = (props) => {
                     )}
                   </>
                 )}
-              { key && (
+              {key && (
                 <Redirect to={updatePathWithQueryParams(key)} />
               )}
               <div id="main-content" className="main-content">

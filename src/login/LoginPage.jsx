@@ -122,7 +122,7 @@ class LoginPage extends React.Component {
       email_or_username: emailOrUsername, password, ...this.queryParams,
     };
     this.props.loginRequest(payload);
-  }
+  };
 
   handleOnFocus = (e) => {
     const { errors } = this.state;
@@ -130,14 +130,14 @@ class LoginPage extends React.Component {
     this.props.setLoginFormData({
       errors,
     });
-  }
+  };
 
   handleOnBlur = (e) => {
     const payload = {
       [e.target.name]: e.target.value,
     };
     this.props.setLoginFormData(payload);
-  }
+  };
 
   handleForgotPasswordLinkClickEvent = () => {
     sendTrackEvent('edx.bi.password-reset_form.toggled', { category: 'user-engagement' });
@@ -238,8 +238,10 @@ class LoginPage extends React.Component {
     return (
       <>
         <Helmet>
-          <title>{intl.formatMessage(messages['login.page.title'],
-            { siteName: getConfig().SITE_NAME })}
+          <title>{intl.formatMessage(
+            messages['login.page.title'],
+            { siteName: getConfig().SITE_NAME },
+          )}
           </title>
         </Helmet>
         <RedirectLogistration
@@ -249,12 +251,12 @@ class LoginPage extends React.Component {
         />
         <div className="mw-xs mt-3">
           {thirdPartyAuthContext.currentProvider
-          && (
-            <ThirdPartyAuthAlert
-              currentProvider={thirdPartyAuthContext.currentProvider}
-              platformName={thirdPartyAuthContext.platformName}
-            />
-          )}
+            && (
+              <ThirdPartyAuthAlert
+                currentProvider={thirdPartyAuthContext.currentProvider}
+                platformName={thirdPartyAuthContext.platformName}
+              />
+            )}
           {this.props.loginError ? <LoginFailureMessage loginError={this.props.loginError} /> : null}
           {submitState === DEFAULT_STATE && this.state.isSubmitted ? windowScrollTo({ left: 0, top: 0, behavior: 'smooth' }) : null}
           {activationMsgType && <AccountActivationMessage messageType={activationMsgType} />}
@@ -373,6 +375,7 @@ LoginPage.defaultProps = {
 LoginPage.propTypes = {
   getThirdPartyAuthContext: PropTypes.func.isRequired,
   intl: intlShape.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
   loginError: PropTypes.objectOf(PropTypes.any),
   loginRequest: PropTypes.func.isRequired,
   loginRequestFailure: PropTypes.func.isRequired,
@@ -397,8 +400,8 @@ LoginPage.propTypes = {
   thirdPartyAuthContext: PropTypes.shape({
     currentProvider: PropTypes.string,
     platformName: PropTypes.string,
-    providers: PropTypes.array,
-    secondaryProviders: PropTypes.array,
+    providers: PropTypes.shape([]),
+    secondaryProviders: PropTypes.shape([]),
     finishAuthUrl: PropTypes.string,
   }),
   institutionLogin: PropTypes.bool.isRequired,

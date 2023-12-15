@@ -1,3 +1,4 @@
+/* eslint-disable no-import-assign */
 import React from 'react';
 
 import * as auth from '@edx/frontend-platform/auth';
@@ -50,9 +51,9 @@ describe('LoginFailureMessage', () => {
     );
 
     const expectedMessage = 'We couldn\'t sign you in.We recently changed our password requirements'
-                            + 'Your current password does not meet the new security requirements. We just sent a '
-                            + 'password-reset message to the email address associated with this account. '
-                            + 'Thank you for helping us keep your data safe.';
+      + 'Your current password does not meet the new security requirements. We just sent a '
+      + 'password-reset message to the email address associated with this account. '
+      + 'Thank you for helping us keep your data safe.';
 
     expect(loginFailureMessage.find('#login-failure-alert').first().text()).toEqual(expectedMessage);
   });
@@ -76,8 +77,8 @@ describe('LoginFailureMessage', () => {
     );
 
     const expectedMessage = 'We couldn\'t sign you in.In order to sign in, you need to activate your account. '
-                            + 'We just sent an activation link to text@example.com. If you do not receive an email, '
-                            + 'check your spam folders or contact openedX support.';
+      + 'We just sent an activation link to text@example.com. If you do not receive an email, '
+      + 'check your spam folders or contact openedX support.';
 
     expect(loginFailureMessage.find('#login-failure-alert').first().text()).toEqual(expectedMessage);
     expect(loginFailureMessage.find('#login-failure-alert').find('a').props().href).toEqual('https://support.edx.org/');
@@ -102,7 +103,7 @@ describe('LoginFailureMessage', () => {
       </IntlProvider>,
     );
     const expectedMessage = 'We couldn\'t sign you in.The username, email or password you entered is incorrect. '
-                            + 'You have 3 more sign in attempts before your account is temporarily locked.If you\'ve forgotten your password, click here to reset it.';
+      + 'You have 3 more sign in attempts before your account is temporarily locked.If you\'ve forgotten your password, click here to reset it.';
 
     expect(loginFailureMessage.find('#login-failure-alert').first().text()).toEqual(expectedMessage);
   });
@@ -237,7 +238,7 @@ describe('LoginFailureMessage', () => {
     expect(loginFailureMessage.find('.pgn__modal-title').text()).toEqual('Password security');
     expect(loginFailureMessage.find('.pgn__modal-body').text()).toEqual(
       'Our system detected that your password is vulnerable. '
-               + 'We recommend you change it so that your account stays secure.',
+      + 'We recommend you change it so that your account stays secure.',
     );
   });
 
@@ -259,7 +260,7 @@ describe('LoginFailureMessage', () => {
     expect(loginFailureMessage.find('.pgn__modal-title').text()).toEqual('Password change required');
     expect(loginFailureMessage.find('.pgn__modal-body').text()).toEqual(
       'Our system detected that your password is vulnerable. '
-               + 'Change your password so that your account stays secure.',
+      + 'Change your password so that your account stays secure.',
     );
   });
 

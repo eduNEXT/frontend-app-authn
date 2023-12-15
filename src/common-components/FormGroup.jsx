@@ -37,7 +37,6 @@ const FormGroup = (props) => {
         onClick={handleClick}
         onChange={props.handleChange}
         controlClassName={props.borderClass}
-
         trailingElement={props.trailingElement}
         floatingLabel={props.floatingLabel}
       >
@@ -71,7 +70,7 @@ FormGroup.defaultProps = {
   className: '',
   errorMessage: '',
   handleBlur: null,
-  handleChange: () => {},
+  handleChange: () => { },
   handleClick: null,
   handleFocus: null,
   helpText: [],
