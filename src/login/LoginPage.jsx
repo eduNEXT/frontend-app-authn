@@ -163,7 +163,8 @@ class LoginPage extends React.Component {
     return errors.password;
   }
 
-  renderThirdPartyAuth(providers, secondaryProviders, currentProvider, thirdPartyAuthApiStatus, intl) {
+  // eslint-disable-next-line default-param-last
+  renderThirdPartyAuth(providers = [], secondaryProviders = [], currentProvider, thirdPartyAuthApiStatus, intl) {
     const isInstitutionAuthActive = !!secondaryProviders.length && !currentProvider;
     const isSocialAuthActive = !!providers.length && !currentProvider;
     const isEnterpriseLoginDisabled = getConfig().DISABLE_ENTERPRISE_LOGIN;

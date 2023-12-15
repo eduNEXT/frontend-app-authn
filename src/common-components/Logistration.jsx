@@ -21,17 +21,16 @@ import { LoginPage } from '../login';
 import { RegistrationPage } from '../register';
 import { backupRegistrationForm } from '../register/data/actions';
 import { clearThirdPartyAuthContextErrorMessage } from './data/actions';
-import {
-  tpaProvidersSelector,
-} from './data/selectors';
 import messages from './messages';
 
 const Logistration = (props) => {
   const { selectedPage, tpaProviders } = props;
   const tpaHint = getTpaHint();
+  console.log('tpaHint', tpaHint);
   const {
     providers, secondaryProviders,
   } = tpaProviders;
+  console.log('providers', providers, secondaryProviders);
   const { formatMessage } = useIntl();
   const [institutionLogin, setInstitutionLogin] = useState(false);
   const [key, setKey] = useState('');
@@ -114,7 +113,7 @@ const Logistration = (props) => {
                     <Tab title={formatMessage(messages['logistration.sign.in'])} eventKey={LOGIN_PAGE} />
                   </Tabs>
                 ))}
-              { key && (
+              {key && (
                 <Redirect to={updatePathWithQueryParams(key)} />
               )}
               <div id="main-content" className="main-content">
@@ -155,8 +154,9 @@ Logistration.defaultProps = {
   selectedPage: REGISTER_PAGE,
 };
 
+// eslint-disable-next-line no-unused-vars
 const mapStateToProps = state => ({
-  tpaProviders: tpaProvidersSelector(state),
+  tpaProviders: { providers: [], secondaryProviders: [] },
 });
 
 export default connect(
