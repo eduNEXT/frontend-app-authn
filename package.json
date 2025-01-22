@@ -15,7 +15,9 @@
     "lint": "fedx-scripts eslint --ext .js --ext .jsx .",
     "snapshot": "fedx-scripts jest --updateSnapshot",
     "start": "fedx-scripts webpack-dev-server --progress",
-    "test": "fedx-scripts jest --coverage --passWithNoTests"
+    "test": "fedx-scripts jest --coverage --passWithNoTests",
+    "dev": "PUBLIC_PATH=/learning/ MFE_CONFIG_API_URL='http://localhost:8000/api/mfe_config/v1' fedx-scripts webpack-dev-server --progress --host apps.local.openedx.io",
+    "replace-variables": "paragon replace-variables -p src -t usage"
   },
   "husky": {
     "hooks": {
@@ -33,13 +35,13 @@
   },
   "dependencies": {
     "@edx/brand": "npm:@openedx/brand-openedx@^1.2.2",
-    "@edx/frontend-platform": "^8.0.0",
+    "@edx/frontend-platform": "npm:@edunext/frontend-platform@8.1.2-alpha.1",
     "@edx/openedx-atlas": "^0.6.0",
     "@fortawesome/fontawesome-svg-core": "6.6.0",
     "@fortawesome/free-brands-svg-icons": "6.6.0",
     "@fortawesome/free-solid-svg-icons": "6.6.0",
     "@fortawesome/react-fontawesome": "0.2.2",
-    "@openedx/paragon": "^22.1.1",
+    "@openedx/paragon": "^23.0.0-alpha.7",
     "@optimizely/react-sdk": "^2.9.1",
     "@redux-devtools/extension": "3.3.0",
     "@testing-library/react": "^12.1.5",
