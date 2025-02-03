@@ -25,7 +25,7 @@ const LargeLayout = () => {
             )}
           >
             {formatMessage(messages['start.learning'])}
-            <div className="text-accent-a">
+            <div className="text-accent-a" style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>
               {formatMessage(messages['with.site.name'], { siteName: getConfig().SITE_NAME })}
             </div>
           </h1>

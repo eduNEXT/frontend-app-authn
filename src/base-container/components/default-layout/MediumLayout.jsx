@@ -29,7 +29,7 @@ const MediumLayout = () => {
               >
                 <span>
                   {formatMessage(messages['start.learning'])}{' '}
-                  <span className="text-accent-a d-inline-block">
+                  <span className="text-accent-a d-inline-block" style={{ textOverflow: 'ellipsis', overflow: 'hidden' }}>
                     {formatMessage(messages['with.site.name'], { siteName: getConfig().SITE_NAME })}
                   </span>
                 </span>
