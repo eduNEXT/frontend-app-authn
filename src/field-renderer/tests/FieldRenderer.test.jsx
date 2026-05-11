@@ -45,7 +45,7 @@ describe('FieldRendererTests', () => {
       name: 'yob-field',
     };
 
-    const { container } = render(<FieldRenderer fieldData={fieldData} onChangeHandler={() => {}} />);
+    const { container } = render(<FieldRenderer fieldData={fieldData} onChangeHandler={() => { }} />);
     expect(container.innerHTML).toEqual('');
   });
 
@@ -105,7 +105,7 @@ describe('FieldRendererTests', () => {
       type: 'unknown',
     };
 
-    const { container } = render(<FieldRenderer fieldData={fieldData} onChangeHandler={() => {}} />);
+    const { container } = render(<FieldRenderer fieldData={fieldData} onChangeHandler={() => { }} />);
     expect(container.innerHTML).toContain('');
   });
 
@@ -347,8 +347,8 @@ describe('FieldRendererTests', () => {
     // Focus the field
     fireEvent.focus(select);
 
-    // Note: Select fields don't show help text in the current implementation
-    // This test documents the current behavior
+    // Help text should now be visible
+    expect(container.textContent).toContain('Select your country of residence');
   });
 
   it('should render select field with options as object format', () => {
@@ -400,14 +400,27 @@ describe('FieldRendererTests', () => {
       },
     };
 
-    const { container } = render(<FieldRenderer value={value} fieldData={fieldData} onChangeHandler={changeHandler} />);
+    let capturedValue = '';
+
+    const mockChangeHandler = jest.fn((event) => {
+      capturedValue = event.target.value;
+    });
+
+    const { container } = render(
+      <FieldRenderer value={value} fieldData={fieldData} onChangeHandler={mockChangeHandler} />,
+    );
+
     const select = container.querySelector('select#favorite-language-field');
 
     fireEvent.change(select, { target: { value: 'python' } });
-    expect(value).toEqual('python');
+
+    expect(mockChangeHandler).toHaveBeenCalled();
+    expect(capturedValue).toBe('python');
 
     fireEvent.change(select, { target: { value: 'javascript' } });
-    expect(value).toEqual('javascript');
+
+    expect(mockChangeHandler).toHaveBeenCalledTimes(2);
+    expect(capturedValue).toBe('javascript');
   });
 
   it('should render all options correctly from object format', () => {
@@ -478,7 +491,7 @@ describe('FieldRendererTests', () => {
       options: null,
     };
 
-    const { container } = render(<FieldRenderer fieldData={fieldData} onChangeHandler={() => {}} />);
+    const { container } = render(<FieldRenderer fieldData={fieldData} onChangeHandler={() => { }} />);
     expect(container.innerHTML).toEqual('');
   });
 });
